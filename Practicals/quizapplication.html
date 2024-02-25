@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Application</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Application</h1>
+  <form id="quizForm">
+    <!-- Question 1 -->
+    <fieldset>
+      <legend>Question 1: What is the capital of France?</legend>
+      <label><input type="radio" name="q1" value="paris"> Paris</label>
+      <label><input type="radio" name="q1" value="berlin"> Berlin</label>
+      <label><input type="radio" name="q1" value="london"> London</label>
+    </fieldset>
+    <!-- Question 2 -->
+    <fieldset>
+      <legend>Question 2: Which planet is known as the Red Planet?</legend>
+      <label><input type="radio" name="q2" value="mars"> Mars</label>
+      <label><input type="radio" name="q2" value="venus"> Venus</label>
+      <label><input type="radio" name="q2" value="jupiter"> Jupiter</label>
+    </fieldset>
+    <!-- Question 3 -->
+    <fieldset>
+      <legend>Question 3: What is the largest mammal in the world?</legend>
+      <label><input type="radio" name="q3" value="elephant"> Elephant</label>
+      <label><input type="radio" name="q3" value="bluewhale"> Blue Whale</label>
+      <label><input type="radio" name="q3" value="giraffe"> Giraffe</label>
+    </fieldset>
+    <!-- Question 4 -->
+    <fieldset>
+      <legend>Question 4: Who wrote "Romeo and Juliet"?</legend>
+      <label><input type="radio" name="q4" value="shakespeare"> William Shakespeare</label>
+      <label><input type="radio" name="q4" value="dickens"> Charles Dickens</label>
+      <label><input type="radio" name="q4" value="twain"> Mark Twain</label>
+    </fieldset>
+    <!-- Question 5 -->
+    <fieldset>
+      <legend>Question 5: What is the powerhouse of the cell?</legend>
+      <label><input type="radio" name="q5" value="mitochondria"> Mitochondria</label>
+      <label><input type="radio" name="q5" value="nucleus"> Nucleus</label>
+      <label><input type="radio" name="q5" value="ribosome"> Ribosome</label>
+    </fieldset>
+    <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    function submitQuiz() {
+      const answers = {
+        q1: "paris",
+        q2: "mars",
+        q3: "bluewhale",
+        q4: "shakespeare",
+        q5: "mitochondria"
+      };
+      
+      let score = 0;
+      
+      // Check user's answers
+      for (const question in answers) {
+        const selectedAnswer = document.querySelector(`input[name=${question}]:checked`);
+        if (selectedAnswer && selectedAnswer.value === answers[question]) {
+          score++;
+        }
+      }
+      
+      // Display the result
+      const resultElement = document.getElementById("result");
+      resultElement.innerHTML = `<p>Your score is: ${score} out of 5</p>`;
+    }
+  </script>
+</body>
+</html>
