@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        #dob {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #terms {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Registration Form</h1>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <!-- Minimum length set to 6 characters -->
+        <input type="password" id="password" name="password" minlength="6" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label>
+            <input type="checkbox" id="terms" name="terms" required>
+            I agree to the terms and conditions
+        </label>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const dob = document.getElementById("dob").value;
+            const terms = document.getElementById("terms").checked;
+
+            if (!name || !email || !password || !dob || !terms) {
+                alert("Please fill in all fields and agree to the terms.");
+                return false;
+            }
+
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{3,}$/;
+            if (!passwordRegex.test(password)) {
+                alert("Invalid Password format. It must contain at least three special characters and one capital letter.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
