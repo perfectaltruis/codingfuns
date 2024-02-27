@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAA Student Registration</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        #profilePhotoError {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>IAA Student Registration</h1>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="registrationNumber">Registration Number (BCS-00-0000-0000):</label>
+        <input type="text" id="registrationNumber" name="registrationNumber" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="profilePhoto">Profile Photo (jpg format only):</label>
+        <input type="file" id="profilePhoto" name="profilePhoto" accept=".jpg" required>
+        <span id="profilePhotoError"></span>
+
+        <label for="password">Password (at least three special characters, one capital letter):</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        function validateForm() {
+            const registrationNumberRegex = /^BCS-\d{2}-\d{4}-\d{4}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{3,}$/;
+
+            const registrationNumberInput = document.getElementById("registrationNumber");
+            const emailInput = document.getElementById("email");
+            const profilePhotoInput = document.getElementById("profilePhoto");
+            const passwordInput = document.getElementById("password");
+            const profilePhotoError = document.getElementById("profilePhotoError");
+
+            // Validate Registration Number
+            if (!registrationNumberRegex.test(registrationNumberInput.value)) {
+                alert("Invalid Registration Number format. Please use BCS-00-0000-0000.");
+                return false;
+            }
+
+            // Validate Email
+            if (!emailRegex.test(emailInput.value)) {
+                alert("Invalid Email format.");
+                return false;
+            }
+
+            // Validate Profile Photo Format
+            const allowedExtensions = /(\.jpg)$/i;
+            if (!allowedExtensions.exec(profilePhotoInput.value)) {
+                profilePhotoError.innerHTML = "Profile photo must be in jpg format.";
+                return false;
+            } else {
+                profilePhotoError.innerHTML = "";
+            }
+
+            // Validate Password
+            if (!passwordRegex.test(passwordInput.value)) {
+                alert("Invalid Password format. It must contain at least three special characters and one capital letter.");
+                return false;
+            }
+
+            // If all validations pass, the form can be submitted
+            return true;
+        }
+    </script>
+</body>
+</html>
