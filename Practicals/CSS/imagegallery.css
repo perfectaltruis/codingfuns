@@ -1,3 +1,4 @@
+        
         #gallery {
             display: flex;
             flex-wrap: wrap;
@@ -21,7 +22,7 @@
             align-items: center;
         }
         #modal img {
-            max-width: 80%;
+            max-width: 90%;
             max-height: 80%;
         }
         #modal button {
